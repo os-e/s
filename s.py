@@ -1,20 +1,31 @@
 import google.generativeai as genai
 import os
 import sys
+
 # AIzaSyCnfcqkQpJjtBtdg1UJp2APyRkm997v9Rg
 # AIzaSyBjbf1USyp_sRX1OmadWR6W48UdkjXm-ls
 # --- Configuration ---
 # Recommended: Load API key from environment variable
+# WARNING: Hardcoding API keys in source code is not recommended for security reasons.
+# Especially if this code will be shared or pushed to version control systems.
+# A better approach is to use environment variables or a separate config file.
+
+# First check for API key in environment
+api_key = os.getenv("GOOGLE_API_KEY")
+
+# If not found in environment, prompt the user
 try:
-    api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
-        raise ValueError("API key not found in environment variable GOOGLE_API_KEY")
+        print("Google API key not found in environment variables.")
+        api_key = input("Please enter your Google Gemini API key: ").strip()
+        
+    if not api_key:
+        raise ValueError("No API key provided - please obtain one from https://ai.google.dev/ and try again")
+    
     genai.configure(api_key=api_key)
 except ValueError as e:
     print(f"Error: {e}")
-    print("Please set the GOOGLE_API_KEY environment variable.")
-    print("See script comments or documentation for instructions.")
-    sys.exit(1) # Exit if API key is not configured
+    sys.exit(1)
 
 # Choose the model - 'gemini-pro' is a versatile choice
 # Other options include 'gemini-1.0-pro', 'gemini-1.5-pro-latest' etc.
