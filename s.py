@@ -4,16 +4,9 @@ import sys
 
 # AIzaSyCnfcqkQpJjtBtdg1UJp2APyRkm997v9Rg
 # AIzaSyBjbf1USyp_sRX1OmadWR6W48UdkjXm-ls
-# --- Configuration ---
-# Recommended: Load API key from environment variable
-# WARNING: Hardcoding API keys in source code is not recommended for security reasons.
-# Especially if this code will be shared or pushed to version control systems.
-# A better approach is to use environment variables or a separate config file.
 
-# First check for API key in environment
 api_key = os.getenv("GOOGLE_API_KEY")
 
-# If not found in environment, prompt the user
 try:
     if not api_key:
         print("Google API key not found in environment variables.")
@@ -27,21 +20,11 @@ except ValueError as e:
     print(f"Error: {e}")
     sys.exit(1)
 
-# Choose the model - 'gemini-pro' is a versatile choice
-# Other options include 'gemini-1.0-pro', 'gemini-1.5-pro-latest' etc.
-# Check Google AI documentation for available models.
-MODEL_NAME = "gemini-2.0-flash" # or 'gemini-2.0-pro' for the latest pro model
 
-# Optional: Configure safety settings
-# See https://ai.google.dev/docs/safety_setting_gemini
-# safety_settings = [
-#     {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-#     {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-#     {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-#     {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-# ]
+# MODEL_NAME = "gemini-2.0-flash" 
+MODEL_NAME = "gemini-1.5-flash" 
+# MODEL_NAME = "gemini-2.0-flash-lite" 
 
-# --- Initialize Model ---
 try:
     model = genai.GenerativeModel(MODEL_NAME)
                              # safety_settings=safety_settings) # Uncomment to use custom safety settings
