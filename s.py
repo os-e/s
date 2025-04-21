@@ -1,7 +1,7 @@
 import google.generativeai as genai
 import os
 import sys
-
+# AIzaSyCnfcqkQpJjtBtdg1UJp2APyRkm997v9Rg
 # AIzaSyBjbf1USyp_sRX1OmadWR6W48UdkjXm-ls
 # --- Configuration ---
 # Recommended: Load API key from environment variable
